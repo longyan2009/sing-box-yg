@@ -17,8 +17,8 @@ jobs:
     # 每行一个{serv00服务器}，一个服务也可，末尾用,间隔，最后一个服务器末尾无需用,间隔
       ACCOUNTS: >
         [
-        {"RES":"n", "SSH_USER":"你的serv00账号名", "SSH_PASS":"你的serv00账号密码", "REALITY":"你serv00账号名.serv00.net", "SUUID":"自设UUID", "TCP1_PORT":"vless的tcp端口", "TCP2_PORT":"vmess的tcp端口", "UDP_PORT":"hy2的udp端口", "HOST":"s1.serv00.com", "ARGO_DOMAIN":"", "ARGO_AUTH":""},
-        {"RES":"y", "SSH_USER":"123456", "SSH_PASS":"7890000", "REALITY":"time.is", "SUUID":"73203ee6-b3fa-4a3d-b5df-6bb2f55073ad", "TCP1_PORT":"55254", "TCP2_PORT":"55255", "UDP_PORT":"55256", "HOST":"s16.serv00.com", "ARGO_DOMAIN":"你的argo固定域名", "ARGO_AUTH":"eyJhIjoiOTM3YzFjYWI88552NTFiYTM4ZTY0ZDQzRmlNelF0TkRBd1pUQTRNVEJqTUdVeCJ9"} 
+        {"RES":"y", "SSH_USER":"dfdsfds", "SSH_PASS":"xJ*E6@lSK6IXHu$K0ImK", "REALITY":"www.speedtest.net", "SUUID":"3ca3e53d-f8df-43cb-915d-3762d96a4f45", "TCP1_PORT":"19747", "TCP2_PORT":"51715", "UDP_PORT":"10297", "HOST":"s08.78110269.xyz", "ARGO_DOMAIN":"serv08.78110259.xyz", "ARGO_AUTH":"eyJhIjoiYzJiZjYzOWIwMmIzODExODU0ZWFkZTNkNjc0MzM3MDciLCJ0IjoiZDRjOGQ3N2EtYzc5ZS00N2M3LTk0YTctYzEyZmM4YmZlODc4IiwicyI6IlpUbGhPREkwTlRrdE56Z3hOaTAwWWpWbUxUbGtaR1l0WVRNeU1qUmxaVGxsTXpReSJ9} ,
+        {"RES":"y", "SSH_USER":"jackwilsonjw", "SSH_PASS":"obbEwaL4veJL@PQsMEzQ", "REALITY":"www.speedtest.net", "SUUID":"5b700c05-e1e4-458b-9b08-e92b489eb355", "TCP1_PORT":"18808", "TCP2_PORT":"54029", "UDP_PORT":"36412", "HOST":"s14.78110269.xyz", "ARGO_DOMAIN":"serv14.78110269.xyz", "ARGO_AUTH":"eyJhIjoiNWE0Y2ZjYzAzNjM4NjEwMzQzZjc0OWM5NDc5ZDExODUiLCJ0IjoiOThiYTRlMzAtYzE3Mi00OWJkLTk3ZmItZGRjMzRmMTYwOTQ5IiwicyI6Ik5UVm1aREpoWXpVdE9HWXlOUzAwTlRsbExUbGpObU10WVdZM1pXVTNNRGxsTURFNSJ9} 
         ]
     steps:
       - name: Checkout Repository
