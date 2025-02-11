@@ -24,9 +24,9 @@ export reset=${reset:-''}
 USERNAME=$(whoami | tr '[:upper:]' '[:lower:]')
 HOSTNAME=$(hostname)
 if [[ "$reset" =~ ^[Yy]$ ]]; then
-crontab -l | grep -v "serv00keep" >rmcron
-crontab rmcron >/dev/null 2>&1
-rm rmcron
+#crontab -l | grep -v "serv00keep" >rmcron
+#crontab rmcron >/dev/null 2>&1
+#rm rmcron
 bash -c 'ps aux | grep $(whoami) | grep -v "sshd\|bash\|grep" | awk "{print \$2}" | xargs -r kill -9 >/dev/null 2>&1' >/dev/null 2>&1
 find ~ -type f -exec chmod 644 {} \; 2>/dev/null
 find ~ -type d -exec chmod 755 {} \; 2>/dev/null
@@ -49,15 +49,11 @@ for ip in "${ym[@]}"; do
 dig @8.8.8.8 +time=2 +short $ip >> hy2ip.txt
 sleep 1  
 done
-for ym in "${ym[@]}"; do
-# 引用frankiejun API
-response=$(curl -s "https://ss.botai.us.kg/api/getip?host=$ym")
-if [[ -z "$response" ]]; then
-for ip in "${ym[@]}"; do
-dig @8.8.8.8 +time=2 +short $ip >> ip.txt
+for host in "${ym[@]}"; do
+response=$(curl -sL --connect-timeout 5 --max-time 7 "https://ss.serv0.us.kg/api/getip?host=$host")
+if [[ -z "$response" || "$response" == *unknown* ]]; then
+dig @8.8.8.8 +time=2 +short $host >> ip.txt
 sleep 1  
-done
-break
 else
 echo "$response" | while IFS='|' read -r ip status; do
 if [[ $status == "Accessible" ]]; then
@@ -282,8 +278,8 @@ openssl ecparam -genkey -name prime256v1 -out "private.key"
 openssl req -new -x509 -days 3650 -key "private.key" -out "cert.pem" -subj "/CN=$USERNAME.serv00.net"
 
 nb=$(hostname | cut -d '.' -f 1 | tr -d 's')
-if [ "$nb" == "14" ]; then
-ytb='"jnn-pa.googleapis.com",'
+if [[ "$nb" =~ (14|15|16) ]]; then
+ytb='"jnn-pa.googleapis.com","gemini.google.com",'
 fi
 hy1p=$(sed -n '1p' hy2ip.txt)
 hy2p=$(sed -n '2p' hy2ip.txt)
@@ -445,8 +441,8 @@ hy3p=$(sed -n '3p' hy2ip.txt)
 }
 EOF
 
-if ! ps aux | grep '[c]onfig' > /dev/null; then
-ps aux | grep '[c]onfig' | awk '{print $2}' | xargs -r kill -9 > /dev/null 2>&1
+if ! ps aux | grep '[r]un -c con' > /dev/null; then
+ps aux | grep '[r]un -c con' | awk '{print $2}' | xargs -r kill -9 > /dev/null 2>&1
 if [ -e "$(basename "${FILE_MAP[web]}")" ]; then
    echo "$(basename "${FILE_MAP[web]}")" > sb.txt
    sbb=$(cat sb.txt)   
@@ -527,11 +523,11 @@ else
 fi
 fi
 }
-if [ -z "$ARGO_DOMAIN" ] && ! ps aux | grep '[t]unnel --url' > /dev/null; then
-ps aux | grep '[t]unnel --url' | awk '{print $2}' | xargs -r kill -9 > /dev/null 2>&1
+if [ -z "$ARGO_DOMAIN" ] && ! ps aux | grep '[t]unnel --u' > /dev/null; then
+ps aux | grep '[t]unnel --u' | awk '{print $2}' | xargs -r kill -9 > /dev/null 2>&1
 cfgo
-elif [ -n "$ARGO_DOMAIN" ] && ! ps aux | grep '[t]unnel --no' > /dev/null; then
-ps aux | grep '[t]unnel --no' | awk '{print $2}' | xargs -r kill -9 > /dev/null 2>&1
+elif [ -n "$ARGO_DOMAIN" ] && ! ps aux | grep '[t]unnel --n' > /dev/null; then
+ps aux | grep '[t]unnel --n' | awk '{print $2}' | xargs -r kill -9 > /dev/null 2>&1
 cfgo
 else
 green "Arog进程已启动"
