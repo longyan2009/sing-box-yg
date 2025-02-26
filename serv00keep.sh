@@ -22,6 +22,7 @@ export reym=${reym:-''}
 export reset=${reset:-''}
 export resport=${resport:-''}
 
+devil binexec on >/dev/null 2>&1
 USERNAME=$(whoami | tr '[:upper:]' '[:lower:]')
 HOSTNAME=$(hostname)
 snb=$(hostname | awk -F '.' '{print $1}')
@@ -54,7 +55,7 @@ dig @8.8.8.8 +time=5 +short "web$nb.serv00.com" >> hy2ip.txt
 dig @8.8.8.8 +time=5 +short "$HOSTNAME" >> hy2ip.txt
 dig @8.8.8.8 +time=5 +short "cache$nb.serv00.com" >> hy2ip.txt
 for host in "${ym[@]}"; do
-response=$(curl -sL --connect-timeout 5 --max-time 7 "https://ss.serv0.us.kg/api/getip?host=$host")
+response=$(curl -sL --connect-timeout 5 --max-time 7 "https://ss.fkj.pp.ua/api/getip?host=$host")
 if [[ "$response" =~ ^$|unknown|not|error ]]; then
 dig @8.8.8.8 +time=5 +short $host >> ip.txt
 sleep 1  
@@ -192,10 +193,10 @@ if [[ $tcp_ports -ne 2 || $udp_ports -ne 1 ]]; then
             fi
         done
     fi
-    echo "端口已调整完成,将断开ssh连接"
+    #echo "端口已调整完成,将断开ssh连接"
     sleep 3
-    devil binexec on >/dev/null 2>&1
-    kill -9 $(ps -o ppid= -p $$) >/dev/null 2>&1
+    #devil binexec on >/dev/null 2>&1
+    #kill -9 $(ps -o ppid= -p $$) >/dev/null 2>&1
 else
     tcp_ports=$(echo "$port_list" | awk '/tcp/ {print $1}')
     tcp_port1=$(echo "$tcp_ports" | sed -n '1p')
@@ -552,11 +553,10 @@ fi
 sleep 2
 if ! pgrep -x "$(cat sb.txt)" > /dev/null; then
 red "主进程未启动，根据以下情况一一排查"
-yellow "1、网页端权限是否开启"
-yellow "2、REP选择y重置一次随机端口，三个端口参数留空不填，再改为n（重要）"
-yellow "3、RES选择y运行一次重置系统，再改为n（重要）"
-yellow "4、当前Serv00服务器炸了？等会再试"
-red "5、以上都试了，哥直接躺平，交给进程保活，过会再来看"
+yellow "1、REP选择y重置一次随机端口，三个端口参数留空不填，再改为n（重要）"
+yellow "2、RES选择y运行一次重置系统，再改为n（重要）"
+yellow "3、当前Serv00服务器炸了？等会再试"
+red "4、以上都试了，哥直接躺平，交给进程保活，过会再来看"
 fi
 }
 
